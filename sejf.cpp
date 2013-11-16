@@ -1,19 +1,20 @@
 #include <string>
 #include <iostream>
 #include <utility>
+#include <climits>
 
 using namespace std;
-
-//typedef signed int int16_t;
 
 class Sejf {
 
 	public :
-		Sejf (string, int);
-		void operator += (int i);
-		void operator -= (int i);
-		void operator *= (int i);
-		int16_t operator [] (int i);
+		Sejf(string, int);
+		void operator += (int);
+		void operator -= (int);
+		void operator *= (int);
+		int16_t operator [] (int);
+
+		Sejf(const Sejf&) = delete;
 		//DEBUG
 		string getText() {return text;}
 		int getAccess() {return access_count;}
@@ -22,12 +23,9 @@ class Sejf {
 	private:
 		string text;
 		int access_count;
-
-		Sejf(const Sejf& that) = delete;
-
 };
 
-Sejf::Sejf (string s, int i = 42) {
+Sejf::Sejf(string s, int i = 42) {
 	text = s;
 	access_count = i;
 }
@@ -58,6 +56,7 @@ int16_t Sejf::operator[] (int i) {
 		return -1;
 }
 
+
 int main() {
 
 	//DEBUG
@@ -74,13 +73,16 @@ int main() {
 	cout << s2.getAccess() << endl;
 	s2 -= 1000;
 	cout << s2.getAccess() << endl;
-	s2 *= 1342561;
+	s2 -= 45;
 	cout << s2.getAccess() << endl;
+	s2 *= INT_MAX;
+	cout << s2.getAccess() << endl;
+	cout << INT_MAX << endl;
 
-	std::swap(s1,s2);
+	//std::swap(s1,s2); //do zrobienia, bo też nie działa
 
-	//Sejf s3(s1); NIE DZIAŁA
-	//Sejf s3 = s1; NIE DZIAŁA
+	//Sejf s3(s1); //NIE DZIAŁA
+	//Sejf s3 = s1; //NIE DZIAŁA
 	//END DEBUG
 
 	return 0;
