@@ -8,7 +8,10 @@
 
 using namespace std;
 
-Sejf::Sejf(string s, int i = 42) { //lista inicjująca
+Sejf::Sejf(string s, int i = 42) 
+    : text("")
+    , access_count(42)
+{
     if (i < 0)
         throw invalid_argument("Access number < 0. Failure.");
 
@@ -23,25 +26,15 @@ Kontroler Sejf::kontroler() {
     return kontrolerForSafe;
 }
 
-Sejf::Sejf(Sejf&& s)
-    // : text("")
-    // , access_count(0)
-{
-    //W całości jednym szablonem, np swap albo move
+Sejf::Sejf(Sejf&& s) {
     text = std::move(s.text); //magiczne move
-    access_count = s.access_count;
-
-    //s.text = "";
-    s.access_count = 0;
+    access_count = std::move(s.access_count);
 }
 
 Sejf& Sejf::operator= (Sejf&& s) { //jak wyżej
     if (this != &s) {
-        text = s.text;
-        access_count = s.access_count;
-
-        s.text = "";
-        s.access_count = 0;
+        text = std::move(s.text);
+        access_count = std::move(s.access_count);
     }
     return *this;
 }
@@ -118,7 +111,7 @@ int main() {
 
     cout << "*** MOVE TEST ***\n";
     cout << "s1: " << s1.getText() << " " << s1.getAccess() << endl;
-    cout << "MOVING\n";#endif
+    cout << "MOVING\n";
     Kontroler kon1 = s1.kontroler();
     Sejf s3 = std::move(s1);
     cout << kon1;
