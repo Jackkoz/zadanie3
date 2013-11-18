@@ -12,7 +12,7 @@ const
         int manipulation = 1;
         int ok = 2;
 
-Kontroler::Kontroler(const Sejf& Safe) : controlledSafe(Safe){}
+Kontroler::Kontroler(const Sejf& Safe) : controlledSafe(Safe) {}
 
 Kontroler::operator bool() const {
         if (controlledSafe.access_count > 0)
@@ -21,21 +21,21 @@ Kontroler::operator bool() const {
                 return false;
 }
 
-bool Kontroler::brokenSafe() const{
+bool Kontroler::brokenSafe() const {
         if (controlledSafe.broken)
                 return true;
         else
                 return false;
 }
 
-bool Kontroler::manipulatedSafe() const{
+bool Kontroler::manipulatedSafe() const {
         if (controlledSafe.manipulated)
                 return true;
         else
                 return false;
 }
 
-std::ostream& operator<<(std::ostream &out, Kontroler const &k){
+std::ostream& operator<<(std::ostream &out, Kontroler const &k) {
         std::string safeMessage;
 
         if (k.brokenSafe())
