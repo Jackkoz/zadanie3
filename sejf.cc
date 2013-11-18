@@ -27,11 +27,11 @@ Kontroler Sejf::kontroler() {
 }
 
 Sejf::Sejf(Sejf&& s) {
-    text = std::move(s.text); //magiczne move
+    text = std::move(s.text);
     access_count = std::move(s.access_count);
 }
 
-Sejf& Sejf::operator= (Sejf&& s) { //jak wyżej
+Sejf& Sejf::operator= (Sejf&& s) {
     if (this != &s) {
         text = std::move(s.text);
         access_count = std::move(s.access_count);
