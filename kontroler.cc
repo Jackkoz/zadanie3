@@ -6,7 +6,7 @@ using namespace std;
 
 //Constants used for output concerning safe condition.
 
-const 
+const //przed każdym + static
     string safeCondition[] = {"ALARM: WLAMANIE\n", "ALARM: ZMANIPULOWANY\n", "OK\n"};
     int breakIn = 0;
     int manipulation = 1;
@@ -22,10 +22,7 @@ Kontroler::operator bool() const {
 }
 
 bool Kontroler::brokenSafe() const {
-    if (controlledSafe.broken)
-        return true;
-    else
-        return false;
+    return controlledSafe.broken; //i tak w każdym
 }
 
 bool Kontroler::manipulatedSafe() const {

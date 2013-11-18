@@ -14,10 +14,10 @@ class Kontroler {
 
         //Operator returns true if the Kontroler's
         //Sejf has more than 0 remaining access counts.
-        operator bool() const;
+        operator bool() const; //explicit
 
         //List of forbidden comparison operators.
-        bool operator<(const Kontroler& k1) = delete;
+        bool operator<(const Kontroler& k1) = delete; //wywalic
         bool operator>(const Kontroler& k1) = delete;
         bool operator<=(const Kontroler& k1) = delete;
         bool operator>=(const Kontroler& k1) = delete;
