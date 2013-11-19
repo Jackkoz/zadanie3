@@ -8,6 +8,7 @@
 *.dylib
 
 # Compiled Static libraries
+a.out
 *.lai
 *.la
 *.a
