@@ -6,30 +6,23 @@ using namespace std;
 
 //Constants used for output concerning safe condition.
 
-const //przed każdym + static
-    string safeCondition[] = {"ALARM: WLAMANIE\n", "ALARM: ZMANIPULOWANY\n", "OK\n"};
-    int breakIn = 0;
-    int manipulation = 1;
-    int ok = 2;
+const static string safeCondition[] = {"ALARM: WLAMANIE\n", "ALARM: ZMANIPULOWANY\n", "OK\n"};
+const static int breakIn = 0;
+const static int manipulation = 1;
+const static int ok = 2;
 
 Kontroler::Kontroler(const Sejf& Safe) : controlledSafe(Safe) {}
 
 Kontroler::operator bool() const {
-    if (controlledSafe.access_count > 0)
-        return true;
-    else
-        return false;
+    return (controlledSafe.access_count > 0);
 }
 
 bool Kontroler::brokenSafe() const {
-    return controlledSafe.broken; //i tak w każdym
+    return controlledSafe.broken;
 }
 
 bool Kontroler::manipulatedSafe() const {
-    if (controlledSafe.manipulated)
-        return true;
-    else
-        return false;
+    return controlledSafe.manipulated;
 }
 
 std::ostream& operator<<(std::ostream &out, Kontroler const &k) {
