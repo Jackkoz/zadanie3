@@ -14,7 +14,7 @@ class Kontroler {
 
         //Operator returns true if the Kontroler's
         //Sejf has more than 0 remaining access counts.
-        explicit operator bool() const; //explicit
+        explicit operator bool() const;
 
     private:
         //The Sejf controlled by this Kontroler.
