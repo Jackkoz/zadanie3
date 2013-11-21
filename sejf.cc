@@ -8,17 +8,15 @@
 
 using namespace std;
 
-Sejf::Sejf(string s, int i = 42) 
-    : text("")
-    , access_count(42)
+Sejf::Sejf(string s, int i = 42)
+    : text(s)
+    , access_count(i)
+    , broken(false)
+    , manipulated(false)
 {
+    cout << "BASIC CONSTRUCTOR\n";
     if (i < 0)
         throw invalid_argument("Access number < 0. Failure.");
-
-    text = s;
-    access_count = i;
-    broken = false;
-    manipulated = false;
 }
 
 Kontroler Sejf::kontroler() {
@@ -26,16 +24,18 @@ Kontroler Sejf::kontroler() {
     return kontrolerForSafe;
 }
 
-Sejf::Sejf(Sejf&& s) {
-    text = std::move(s.text);
-    access_count = std::move(s.access_count);
-}
+Sejf::Sejf(Sejf&& s) 
+    : text(std::move(s.text))
+    , access_count(std::move(s.access_count))
+{cout << "RVALUE CONSTRUCTOR\n";}
 
 Sejf& Sejf::operator= (Sejf&& s) {
     if (this != &s) {
         text = std::move(s.text);
         access_count = std::move(s.access_count);
+        cout << "RVALUE MAKING MOVES\n";
     }
+    cout << "RVALUE OPERATOR=\n";
     return *this;
 }
 
@@ -76,7 +76,17 @@ int16_t Sejf::operator[] (int i) {
         return -1;
 }
 
+Sejf daj_sejfa() {
+    Sejf s("a");
+    return s;
+}
+
 int main() {
+    cout << "***DAJ SEJFA TEST***\n";
+    Sejf s15 = daj_sejfa();
+    s15 = daj_sejfa();
+    Sejf s16(daj_sejfa());
+    cout << "***END TEST***\n";
 
     //DEBUG
     Sejf s1("aaa", 5);
@@ -98,7 +108,7 @@ int main() {
     cout << s2.getAccess() << endl;
     cout << INT_MAX << endl;
 
-    //Sejf s3("asdf", -1); // działa jak chcemy, czyli rzuca wyjątek
+    //Sejf s30("asdf", -1); // działa jak chcemy, czyli rzuca wyjątek
 
     cout << "*** SWAP TEST ***\n";
     cout << "s1: " << s1.getText() << " " << s1.getAccess() << endl;
@@ -152,14 +162,13 @@ int main() {
     a1[2];
     cout << k1;
     cout << "*** END KONTROLER TEST ***\n";
-    //obecnie powyższe przenosi sejf i zeruje ten, z które wzięło
 
     std::swap(s3, s3);
     s3 = std::move(std::move(s3));
     cout << "s3: " << s3.getText() << " " << s3.getAccess() << endl;
 
-    //Sejf s3(s1); //Sypie kompilację
-    //Sejf s3 = s1; //Sypie kompilację
+    //Sejf s10(s1); //Sypie kompilację
+    //Sejf s10 = s1; //Sypie kompilację
     //END DEBUG
 
     return 0;
